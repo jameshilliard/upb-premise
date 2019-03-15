@@ -1,0 +1,58 @@
+PRECOMPILED_CXX = 1 
+PRECOMPILED_INCLUDE = stdafx.h 
+PRECOMPILED_OBJ = stdafxp.obj 
+!include ..\premise.inc 
+# 
+TARGETNAME=upbSA
+TARGETPATH=obj  
+TARGETTYPE=DYNLINK  
+DLLENTRY=_DllMainCRTStartup
+#  
+# The TARGETLIBS macro specifies additional libraries to link against your target  
+TARGETLIBS= \
+    $(SDK_LIB_PATH)\kernel32.lib \
+    $(SDK_LIB_PATH)\user32.lib \
+    $(SDK_LIB_PATH)\gdi32.lib \
+    $(SDK_LIB_PATH)\advapi32.lib \
+    $(SDK_LIB_PATH)\ole32.lib \
+    $(SDK_LIB_PATH)\oleaut32.lib \
+    $(SDK_LIB_PATH)\uuid.lib \
+    $(SDK_LIB_PATH)\adsiid.lib \
+    $(SDK_LIB_PATH)\Ws2_32.lib \
+    $(SDK_LIB_PATH)\shlwapi.lib \
+    $(SYS_LIB_PATH)\sysuuid.lib \
+    $(SDK_LIB_PATH)\Iphlpapi.lib \
+	$(SDK_LIB_PATH)\strsafe.lib
+
+INCLUDES=$(SDK_INC_PATH);$(INCLUDES)
+
+# The developer defines the SOURCES macro. It contains a list of all the  
+# source files for this component. Specify each source file on a separate  
+# line using the line-continuation character. This minimizes merge  
+# conflicts if two developers are adding source files to the same component.  
+
+
+SOURCES= \
+   $(TARGETNAME).idl \
+   $(TARGETNAME).rc \
+   StdAfx.cpp \
+   $(TARGETNAME)Driver.cpp \
+   $(TARGETNAME).cpp
+
+#  
+# Next, specify options for the compiler using C_DEFINES.   
+#  
+C_DEFINES = $(C_DEFINES) -D_USRDLL
+
+
+# Defining either (or both) the variables NTTARGETFILE0 and/or NTTARGETFILES  
+# causes makefile.def to include .\makefile.inc immediately after it  
+# specifies the top level targets (all, clean and loc) and their dependencies.  
+# The makefile.def file expands NTTARGETFILE0 as the first dependent for the  
+# "all" target and NTTARGETFILES as the last dependent for the "all" target.  
+# This is useful for specifying additional targets and dependencies that do not fit the  
+# general case covered by makefile.def.  
+#  
+#   NTTARGETFILE0=  
+#   NTTARGETFILES=  
+#   For more information about the macros in this file, see Macro Definitions.   

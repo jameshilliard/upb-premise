@@ -1,0 +1,27 @@
+//
+// upb.idl : IDL source for upb.dll
+//
+// This file will be processed by the MIDL tool to
+// produce the type library (upb.tlb) and marshalling code.
+//
+import "oaidl.idl";
+import "ocidl.idl";
+[
+	uuid(79F7294C-D521-408C-97FE-C1D7F7E51897),
+	version(1.0),
+	helpstring("upb 1.0 Type Library")
+]
+library upbLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(0159E9F7-D269-4704-9B68-84218049E8E7),
+		helpstring("upbDriver Class")
+	]
+	coclass upbDriver
+	{
+		[default] interface IUnknown;
+	};
+};

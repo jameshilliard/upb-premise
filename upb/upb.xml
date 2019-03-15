@@ -1,0 +1,190 @@
+<DriverLibrary Name="upb" Description="Universal Power Bus" Version="0.10" ID="{4A9473C8-8D8C-4872-B1DB-F9B8692AD4EC}">
+	<Class Name="upb" Description="Univeral Power Bus" ID="{0159E9F7-D269-4704-9B68-84218049E8E7}">
+		<SuperClass LinkObject="sys://Schema/System/Subsystem" ID="{4CC21A4C-CFC3-4465-A87A-B50E8513A2DC}"/>
+		<SuperClass LinkObject="sys://Schema/System/Container" ID="{1DC0BA92-F1A3-4929-9B9D-82DFC03C3AEB}"/>
+		<ChildClass LinkObject="sys://Schema/upb/upbSerialInterface" ID="{B62EF124-F9E1-4D74-A4AD-ECE879FA65A7}"/>
+		<ChildClass LinkObject="sys://Schema/upb/upbUSBInterface" ID="{C2D66184-9C21-4B8B-B162-D9195BDFCC6C}"/>
+		<ChildClass LinkObject="sys://Schema/upb/upbTCPInterface" ID="{0F4A9917-6132-47F0-807E-5E3C4945DD3E}"/>
+		<Property Name="upbManufacturerID" DisplayName="Manufacturer ID" Class="sys://Schema/System/Number" Description="Unique identifier of the UPB manufacturer" ReadOnly="True" DefaultValue="0" ID="{AC36F78A-9F3E-4CFE-A1BA-DF008E3B24F1}"/>
+	</Class>
+	<Class Name="upbInterface" Description="Univeral Powerline Bus Interface" Virtual="true" ID="{9CD4DD03-3AE4-484B-AF98-73FAC196F700}">
+		<SuperClass LinkObject="sys://Schema/System/Container" ID="{52E75A03-F122-4F22-81BA-1C0649B7FEA5}"/>
+		<Property Name="UpbVersion" DisplayName="UPB Interface Version" Class="sys://Schema/System/MultiValue" Description="Identifies the version of the UPB specification the interface will conform to" DefaultValue="1" ID="{EC89FA22-1ECF-4E5C-AE38-3FC76B386C72}">
+			<Enum Name="001" Value="1" ID="{EAFF4A71-7579-4E1E-9AB4-9D0856BA75FA}"/>
+			<Enum Name="002" Value="2" ID="{B3AD2DD7-EAE9-4CDE-96FB-C60DB1C00846}"/>
+		</Property>
+		<Property Name="ForceNetworkEnum" DisplayName="Force Network Enumeration" Class="sys://Schema/System/Boolean" Persistent="False" Momentary="True" Description="Force a network enumeration to start" ID="{536D98A0-97EE-46E5-8CD2-9C5E8AFE8311}"/>
+		<Property Name="NetworkEnumID" DisplayName="Enumerate Network ID" Class="sys://Schema/System/Number" DefaultValue="-1" Persistent="False" Description="Which network identifier to enumerate in addition to existing devices, zero to enumerate all networks, or -1 to enumerate only existing devices" ID="{0AA81511-D66D-4475-B692-0747DB607E98}"/>
+		<Property Name="NextUniqueID" Class="sys://Schema/System/Number" Browsable="False" Description="Next unique identifier to generate" ReadOnly="True" ID="{EAB85455-1731-4217-8095-B24BC1A7589E}"/>
+		<Property Name="LastPasswordSet" Class="sys://Schema/System/Number" Browsable="False" Description="The last password that was set for use on guessing the password for new modules" ReadOnly="True" ID="{CC88E77F-99F8-490C-A4D1-DA17E858E222}"/>
+		<Property Name="upbLinkData" DisplayName="Link Data" Class="sys://Schema/System/Text" Bindable="True" Persistent="False" Description="Message data to send as a link packet to the specified NID and LinkID - {nid}{link}{mdid}{data}" ID="{54DED797-426E-45F2-A568-F5C9410AB61E}"/>
+		<Property Name="PollNetwork" DisplayName="Poll Network" Class="sys://Schema/System/Boolean" DefaultValue="True" Description="Indicates if the network should be continuously polled when idle" ID="{17070AB1-1CDE-411D-BB1E-0EBA8BCD3480}"/>
+		<ChildClass LinkObject="sys://Schema/upb/upbUnknownPIM" ID="{B84D0076-7AC2-4D5B-AEF2-CF07D3563B99}"/>
+		<ChildClass LinkObject="sys://Schema/upb/upbUnknownModule" ID="{4C1A798F-FA06-4C79-A818-83442496F03E}"/>
+	</Class>
+	<Class Name="upbSerialInterface" DisplayName="Serial Interface" Description="Univeral Powerline Bus Serial Interface" ID="{D148E9F0-1CBE-4CCE-8C24-73AB00492AAE}">
+		<SuperClass LinkObject="sys://Schema/upb/upbInterface" ID="{C71FE0F0-3BE4-4E99-8CF5-DD37A6DEA29B}"/>
+		<SuperClass LinkObject="sys://Schema/Networks/Transport" ID="{36DDD347-7AF1-40EC-B020-DC82B0252A26}"/>
+	</Class>
+	<Class Name="upbUSBInterface" DisplayName="USB Interface" Description="Univeral Powerline Bus USB Interface" ID="{4A88EFEA-16F6-48D2-908A-4361D284D556}">
+		<SuperClass LinkObject="sys://Schema/upb/upbInterface" ID="{606E7E6C-CE7C-4CC7-8B47-45B9BD90A1AC}"/>
+	</Class>
+	<Class Name="upbTCPInterface" DisplayName="TCP Interface" Description="Univeral Powerline Bus TCP Interface" ID="{1AC1EB73-ED57-435F-AF84-ADF42F7B595C}">
+		<SuperClass LinkObject="sys://Schema/upb/upbInterface" ID="{430F89A0-614B-4E1B-A68F-85B23921BCA2}"/>
+		<SuperClass LinkObject="sys://Schema/Networks/TCPTransport" ID="{DEA9136A-9016-4E76-B6EB-E7D18D39A0AC}"/>
+	</Class>
+	<Class Name="DeviceBase" Description="Base for common UPB Device Setup Registers" Virtual="true" ID="{B4C012DB-097C-4926-96C2-67A2965B90D9}">
+		<Property Name="UpbOptions" DisplayName="UPB Options" Class="sys://Schema/System/Number" Bindable="True" Description="Identifies unique UPB options that are enabled for this device" ID="{36B0C529-A878-44C2-8F82-AAF33346BC5C}"/>
+		<Property Name="UpbVersion" DisplayName="UPB Version" Class="sys://Schema/System/Number" Description="Identifies the version of the UPB specification this device conforms to" ReadOnly="True" ID="{C0A20F41-6787-4A34-97EA-F1DDC0CF8906}"/>
+		<Property Name="ManufacturerID" DisplayName="Manufacturer ID" Class="sys://Schema/System/Number" Description="Unique identifier of the manufacturer of this UPB device" ReadOnly="True" ID="{6EBB8179-2E89-4364-A1C3-D1A6AA211314}"/>
+		<Property Name="ManufacturerName" DisplayName="Manufacturer Name" Class="sys://Schema/System/Text" Description="The manufacturer's name" ReadOnly="True" ID="{40E0198A-7D05-43FF-97D5-2179C15ED0C0}"/>
+		<Property Name="ProductID" DisplayName="Product ID" Class="sys://Schema/System/Number" Description="The manufacturer's unique product identifier for this UPB device" ReadOnly="True" ID="{45959D09-9635-4344-B2D4-6926EA0B61FD}"/>
+		<Property Name="ProductName" DisplayName="Product Name" Class="sys://Schema/System/Text" Description="The manufacturer's product name" ReadOnly="True" ID="{6EF7B035-9C61-4DD3-A683-A260BC29F937}"/>
+		<Property Name="FirmwareVersion" DisplayName="Firmware Version" Class="sys://Schema/System/Text" Description="The manufacturer's unique version number of this Product ID" ReadOnly="True" ID="{EC9D29B1-5514-40AF-B116-5415B9B797A6}"/>
+		<Property Name="upbFirmwareVersion" Class="sys://Schema/System/Number" Browsable="False" Description="The manufacturer's unique version number of this Product ID" ReadOnly="True" ID="{F2C5FB25-80BF-49A5-AD1F-83CEA3254FEF}"/>
+		<Property Name="upbUniqueID" Class="sys://Schema/System/Number" Browsable="False" Description="A unique identifier for this module/pim" ReadOnly="True" ID="{4F1F8298-DCE5-4CCC-8818-712E764FF5BB}"/>
+		<Property Name="upbDeviceInitialized" DisplayName="Device Present" Class="sys://Schema/System/Boolean" Bindable="True" Persistent="False" Description="Indicates whether the module is online or not" ReadOnly="True" ID="{078D5096-4289-4B12-8035-BFAD23F64C4C}"/>
+	</Class>
+	<Class Name="upbPIM" Description="Univeral Powerline Interface Module" Virtual="true" ID="{3592C169-9C7A-48F5-B811-047C607A96CF}">
+		<SuperClass LinkObject="sys://Schema/upb/DeviceBase" ID="{93C7FE5F-1BE1-4CFF-B3E5-3892126DA0E6}"/>
+		<Property Name="upbNetworkData" Class="sys://Schema/System/Text" Bindable="True" Persistent="False" Browsable="False" Description="Link message data from the network" ReadOnly="True" ID="{EFE8B8B2-D914-436D-947B-B605D7D2088F}"/>
+		<Property Name="PulseStrength" DisplayName="Pulse Strength" Class="sys://Schema/System/Percent" Bindable="True" Persistent="False" Description="Pulse signal strength" ReadOnly="True" ID="{593FFD1E-9EF9-4204-A537-23A5799DDC08}"/>
+	</Class>
+	<Class Name="PIM" DisplayName="UPB PIM" Description="Univeral Powerline Interface Module Appliance" ID="{F9C6066F-D1F3-453D-9521-6799A15A5629}">
+		<SuperClass LinkObject="sys://Schema/upb/upbPIM" ID="{04E5AB1D-7B23-42E7-8BFD-E0D38316E30C}"/>
+		<SuperClass LinkObject="sys://Schema/Device/Appliance/Appliance" ID="{C3C96C54-8DB7-4A49-9E76-19071501E306}"/>
+	</Class>
+	<Class Name="upbModule" Description="Univeral Powerline Bus Module" Virtual="true" ID="{A059C1C3-E92E-43C3-9B93-128AFD2BEA1F}">
+		<SuperClass LinkObject="sys://Schema/upb/DeviceBase" ID="{DD33DE04-E129-43C1-9CC2-9C75E3B9B489}"/>
+		<Property Name="NetworkID" DisplayName="Network ID" Class="sys://Schema/System/Number" Bindable="True" Description="Unique identifier for the UPB Network this device communicates on" ID="{00335A03-8225-4182-87B0-8D7241178093}"/>
+		<Property Name="ModuleID" DisplayName="Module ID" Class="sys://Schema/System/Number" Bindable="True" Description="Network-unique identifier for this UPB device" ID="{07ACD648-3881-4884-946A-F47B3C098978}"/>
+		<Property Name="NetworkPassword" DisplayName="Device Password" Class="sys://Schema/System/Text" Bindable="True" Description="Password designed to keep unauthorized users from accessing the Setup Registers of this device: 0000-FFFF" ID="{53DB7D97-EE3F-4D24-9A3C-3956E24B5D59}"/>
+		<Property Name="NetworkName" DisplayName="Network Name" Class="sys://Schema/System/Text" Bindable="True" Description="A human readable name for the UPB Network that this device communicates on" ID="{D7A70D7F-C4A5-4079-A2DF-1E17C1FA14CC}"/>
+		<Property Name="RoomName" DisplayName="Room Name" Class="sys://Schema/System/Text" Bindable="True" Description="A human readable name for the room that this UPB device is installed in" ID="{A24EBBE1-BF0D-4E84-AF86-053F7EA795B5}"/>
+		<Property Name="DeviceName" DisplayName="Device Name" Class="sys://Schema/System/Text" Bindable="True" Description="A human readable name for this UPB device" ID="{A28CFF55-8327-441A-9B17-998D6FD07937}"/>
+		<Property Name="Reset" Class="sys://Schema/System/Boolean" Bindable="True" Persistent="False" Momentary="True" Description="Reset the device" ID="{0418F2F0-C2F8-47D1-BDAF-3311E50F2E53}"/>
+		<Property Name="Virtualize" Class="sys://Schema/System/Boolean" Bindable="True" Persistent="False" Momentary="True" Description="Reset the transmit components and commands for the module so that they use the reserved command set" ID="{E237034B-02A6-4F8D-B21C-07040E2D3BD2}"/>
+		<Property Name="upbChecksum" Class="sys://Schema/System/Number" Browsable="False" Description="Checksum of first 64 setup registers" ReadOnly="True" ID="{6AAB44DC-73D7-4E6A-AF30-21CD294F945A}"/>
+		<Property Name="SetupChecksum" Class="sys://Schema/System/Number" Browsable="False" Description="Checksum of all setup registers" ReadOnly="True" ID="{C0B696BD-0F02-4731-981E-3DC2788BAA1A}"/>
+		<Property Name="upbChecksumDifference" Class="sys://Schema/System/Number" Browsable="False" Description="The difference between the UPB checksum with and without the password bytes, -1" ReadOnly="True" ID="{9BB2CA15-4ECE-4215-B951-77B174171651}"/>
+		<Property Name="PasswordProbe" Class="sys://Schema/System/Number" Persistent="False" Browsable="False" Description="Current password probe" ReadOnly="True" ID="{F5CA3C46-32C2-4AB9-ADFD-9B2E569BEE73}"/>
+		<Property Name="SetupRegisterCount" Class="sys://Schema/System/Number" Browsable="False" Description="The number of Setup Registers this module uses" ReadOnly="True" ID="{8483D5A9-4B10-496F-B4D8-09391F3653B6}"/>
+		<Property Name="SetupRegisterCache" Class="sys://Schema/System/Text" Bindable="True" ReadOnly="True" Browsable="False" Description="Cache of registers" ID="{50CDAD01-8A00-49F9-BC9C-511BE014AED5}"/>
+		<Property Name="upbNetworkMessage" Class="sys://Schema/System/Text" Bindable="True" Peristent="False" Browsable="False" Description="Send data to the network device - {mdid}{data}" ID="{E622C853-6DBF-4EAA-A2C2-4C0CA4013F5A}"/>
+		<Property Name="upbNetworkData" Class="sys://Schema/System/Text" Bindable="True" Persistent="False" Browsable="False" Description="Data from the network" ReadOnly="True" ID="{E9D1FCED-8D01-4664-B124-40DEFB6A9482}"/>
+		<Property Name="upbNetworkIdle" Class="sys://Schema/System/Boolean" Bindable="True" Persistent="False" Momentary="True" Browsable="False" Description="Set when the network is idle and this module may verify device state" ID="{F1A94CB3-D417-4252-A130-542BE8F5567C}"/>
+		<Property Name="ResolveDuplicateAddress" DisplayName="Resolve Conflicting Address" Class="sys://Schema/System/Boolean" Bindable="True" Persistent="False" Momentary="True" Description="Resolve modules with duplicate addresses" ID="{DFFEA260-7C6E-4706-9DCE-445E525CB861}"/>
+	</Class>
+	<Class Name="upbUnknownPIM" DisplayName="Unknown PIM" Description="Univeral Powerline Interface Module" ID="{3509DBF7-4B66-4505-AC26-E2609A957A89}">
+		<SuperClass LinkObject="sys://Schema/upb/upbPIM" ID="{4DD455E7-3C3B-4FB1-891E-0023BF2B6B62}"/>
+		<SuperClass LinkObject="sys://Schema/System/BindingTarget" ID="{8DA7DC5C-5D77-4084-ACFE-3F6CD17FE98B}"/>
+	</Class>
+	<Class Name="upbUnknownModule" DisplayName="Unknown Module" Description="Univeral Powerline Bus Module" ID="{1375FF0B-10CD-4779-813B-7C912BE1D5BA}">
+		<SuperClass LinkObject="sys://Schema/upb/upbModule" ID="{F27AF350-A55F-4CFE-AC94-8C7CA11261EE}"/>
+		<SuperClass LinkObject="sys://Schema/System/BindingTarget" ID="{BA3D4BBA-1A88-499E-A885-15D7E4BBB424}"/>
+	</Class>
+	<Class Name="Component" Description="Common Component properties" Virtual="true" ID="{3BA4FB4E-6969-4E09-A2C5-C8FA1255AACE}">
+		<Property Name="LinkID" DisplayName="Link ID" Class="sys://Schema/System/Number" DefaultValue="255" ID="{CF54D327-DBB9-4B10-8911-AD97F34986FF}"/>
+	</Class>
+	<Class Name="ReceiveComponent" Description="Common Receive Component properties" ID="{208545D4-4D16-42FE-8014-EBC348B6F254}">
+		<SuperClass LinkObject="sys://Schema/upb/Component" ID="{AF9A24DD-249D-47A5-B4C0-4D5963CC7104}"/>
+	</Class>
+	<Class Name="TransmitComponent" Description="Common Transmit Component properties" ID="{661C30B1-C86B-4B2A-888F-D87891E0D3EC}">
+		<SuperClass LinkObject="sys://Schema/upb/Component" ID="{400F371E-1503-4977-9C91-872983923E65}"/>
+	</Class>
+	<Class Name="TransmissionControl" Virtual="true" Description="Message transmission options" ID="{3336541C-0CD1-4739-A08B-40F11DBBB1E0}">
+		<Property Name="EventPacketType" DisplayName="Event Packet Type" Class="sys://Schema/System/Boolean" Description="Transmit events as link packets or direct packets" DefaultValue="True" CaptionTrue="Link" CaptionFalse="Direct" ID="{58332F1F-D0A9-4FFF-A109-BAC151A0B36D}"/>
+		<Property Name="AckMessageRequest" DisplayName="Ack Message Request" Class="sys://Schema/System/Boolean" Description="Whether to request an Ack Message or not" ID="{4A6F7C9A-9E5B-47D5-A8E7-2BC5EED8BD74}"/>
+		<Property Name="IdPulseRequest" DisplayName="Id Pulse Request" Class="sys://Schema/System/Boolean" Description="Whether to request an ID pulse acknowledgement or not" ID="{58A6C99F-38E2-40C0-B8C5-3197DAB2783D}"/>
+		<Property Name="AckPulseRequest" DisplayName="Ack Pulse Request" Class="sys://Schema/System/Boolean" Description="Whether to request an Ack pulse acknowledgement or not" ID="{64A8BDD1-39A8-437E-9E4D-42E8A1775C0F}"/>
+		<Property Name="TransmissionCount" DisplayName="Transmission Count" Class="sys://Schema/System/MultiValue" Description="The count of times to send event packets" DefaultValue="0" ID="{F0BE7B1C-9D76-4FED-9AFE-14A5232CA50F}">
+			<Enum Name="1" Value="0" ID="{74EB9E85-B00E-4CCB-9023-834B23225D01}"/>
+			<Enum Name="2" Value="1" ID="{DC6843F7-2E79-4F29-904B-55ED6EAC7B9C}"/>
+			<Enum Name="3" Value="2" ID="{88CAE66C-41A8-46E3-8DF6-9C4C5F9A421E}"/>
+			<Enum Name="4" Value="3" ID="{AD626C95-0158-4052-B48D-6BB5C1483078}"/>
+		</Property>
+	</Class>
+	<Class Name="FadeRate" Description="Fade rate definition" ID="{FD3421D9-A8CB-425B-8BC5-A26470000A5B}">
+		<Property Name="FadeRate" Class="sys://Schema/System/MultiValue" DefaultValue="255" Description="Fade rate" ID="{E2EFB69D-43B6-4AE7-94D6-C4A6F8CB42BD}">
+			<Enum Name="Snap" Value="0" ID="{6B725527-69F4-48D0-9340-B09015DEF224}"/>
+			<Enum Name="0Point8Seconds" DisplayName="0.8 Seconds" Value="1" ID="{97281EF6-E227-4EFC-A9D1-08B0D4372245}"/>
+			<Enum Name="1Point6Seconds" DisplayName="1.6 Seconds" Value="2" ID="{3DF92B1F-1A0B-4C91-BEB2-676E9C6D3C6E}"/>
+			<Enum Name="3Point3Seconds" DisplayName="3.3 Seconds" Value="3" ID="{4D053278-3A2F-451E-8CD8-5F8F62EDDC53}"/>
+			<Enum Name="5Point0Seconds" DisplayName="5.0 Seconds" Value="4" ID="{9FAC4BDE-5A4D-4187-9E17-E520A5E141D8}"/>
+			<Enum Name="6Point6Seconds" DisplayName="6.6 Seconds" Value="5" ID="{1A767B49-7F17-4937-BE41-84ACC490C532}"/>
+			<Enum Name="10Seconds" DisplayName="10 Seconds" Value="6" ID="{A83DC7D2-5B99-4110-BAC2-B8C374426362}"/>
+			<Enum Name="20Seconds" DisplayName="20 Seconds" Value="7" ID="{651D0C6F-EB36-45AD-8373-E0F1EBE1649C}"/>
+			<Enum Name="30Seconds" DisplayName="30 Seconds" Value="8" ID="{9D6310EB-7F82-4E55-8BAA-4B68792D544C}"/>
+			<Enum Name="1Minute" DisplayName="1 Minute" Value="9" ID="{BB02E0AB-EB50-4939-A1FA-59B654309062}"/>
+			<Enum Name="2Minutes" DisplayName="2 Minutes" Value="10" ID="{F3BE18A5-CAAA-4A0B-81C5-62D973936BC6}"/>
+			<Enum Name="5Minutes" DisplayName="5 Minutes" Value="11" ID="{43ABF642-60CE-4518-B8FD-AF957920EBCF}"/>
+			<Enum Name="10Minutes" DisplayName="10 Minutes" Value="12" ID="{6331698D-D943-463E-8FE0-6DFE57BF3EE5}"/>
+			<Enum Name="15Minutes" DisplayName="15 Minutes" Value="13" ID="{F520F931-CEEF-4BAC-B31C-0C8C0C019834}"/>
+			<Enum Name="30Minutes" DisplayName="30 Minutes" Value="14" ID="{F68DC107-7359-4CB0-9EE3-E0DFBA376683}"/>
+			<Enum Name="1Hour" DisplayName="1 Hour" Value="15" ID="{09C7D760-1B4A-4315-8A81-8BC1D53843F2}"/>
+			<Enum Name="Default" Value="255" ID="{924591EE-5AD6-48B1-9A07-FCF36E8EEE5D}"/>
+		</Property>
+	</Class>
+	<Class Name="DefaultFadeRate" Description="Default fade rate definition" ID="{305EF85D-C7C4-4B2C-9F7D-C2E0A22BBF6C}">
+		<Property Name="DefaultFadeRate" Class="sys://Schema/System/MultiValue" Description="Default fade rate" DefaultValue="2" ID="{92DB191B-5A99-4230-B06D-6ADCE6EEBE83}">
+			<Enum Name="Snap" Value="0" ID="{B5512ACE-7763-4AF4-B006-CF35CA553A3A}"/>
+			<Enum Name="0Point8Seconds" DisplayName="0.8 Seconds" Value="1" ID="{6EE6D08E-C16B-4C3E-969E-E58D064DA32B}"/>
+			<Enum Name="1Point6Seconds" DisplayName="1.6 Seconds" Value="2" ID="{9289CD46-AC9C-4A7C-A3DD-FAA0770EF90F}"/>
+			<Enum Name="3Point3Seconds" DisplayName="3.3 Seconds" Value="3" ID="{169AD8B2-E6E6-425A-AE41-CB8A658AEA6F}"/>
+			<Enum Name="5Point0Seconds" DisplayName="5.0 Seconds" Value="4" ID="{0E837A91-9FCE-41B7-B0EE-6B37AAAE6267}"/>
+			<Enum Name="6Point6Seconds" DisplayName="6.6 Seconds" Value="5" ID="{8278E50A-320B-4316-B2CC-BF01EFB330EA}"/>
+			<Enum Name="10Seconds" DisplayName="10 Seconds" Value="6" ID="{1D2467F6-99A6-43A5-A5AB-C85484C4AD33}"/>
+			<Enum Name="20Seconds" DisplayName="20 Seconds" Value="7" ID="{A66C21EE-A781-4989-8CD4-0489BB2A55CD}"/>
+			<Enum Name="30Seconds" DisplayName="30 Seconds" Value="8" ID="{029FA3AD-B187-40A7-9605-C8FDEEB28B2D}"/>
+			<Enum Name="1Minute" DisplayName="1 Minute" Value="9" ID="{385D72AD-788E-4FCC-B241-A10CB5BB2EF7}"/>
+			<Enum Name="2Minutes" DisplayName="2 Minutes" Value="10" ID="{237B4BCB-DA63-4EB8-A162-3B69657AF13F}"/>
+			<Enum Name="5Minutes" DisplayName="5 Minutes" Value="11" ID="{7D5FE04F-67ED-429F-9574-65137308C23B}"/>
+			<Enum Name="10Minutes" DisplayName="10 Minutes" Value="12" ID="{9841B48C-B32D-421D-A145-BD866D082B49}"/>
+			<Enum Name="15Minutes" DisplayName="15 Minutes" Value="13" ID="{425F1143-2FD2-4A30-9E70-688B688C39BC}"/>
+			<Enum Name="30Minutes" DisplayName="30 Minutes" Value="14" ID="{32CE5A4F-4C32-4C23-80B0-38C843FC0DCE}"/>
+			<Enum Name="1Hour" DisplayName="1 Hour" Value="15" ID="{CF7EA265-A924-4FA0-850F-02032FFF82D8}"/>
+		</Property>
+	</Class>
+	<Class Name="SwitchReceiveComponents" Description="Switch Receive Components" ID="{B5A50CF8-E8C6-4EDA-AB36-72662CA8C527}">
+		<SuperClass LinkObject="sys://Schema/System/Container" ID="{DC28E907-C227-43F6-8412-DE6B5942B9D6}"/>
+		<ChildClass LinkObject="sys://Schema/upb/SwitchReceiveComponent" ID="{F6D04F10-AC54-4A4B-9786-38ACF5DFE011}"/>
+	</Class>
+	<Class Name="SwitchReceiveComponent" Description="Switch Receive Component" ID="{50981B9A-38EF-44FD-9F1B-9CBB4B44C8EA}">
+		<SuperClass LinkObject="sys://Schema/upb/ReceiveComponent" ID="{18DA1437-35CC-45E1-8829-74C5BACDD78C}"/>
+		<Property Name="ComponentID" Class="sys://Schema/System/Number" ReadOnly="True" Description="Unique identifier for this receive component" ID="{A601F20A-0443-4104-80DB-8EB86F06564D}"/>
+		<Property Name="LightLevel" Class="sys://Schema/System/Percent" Description="Light Level" ID="{B95638F4-F60C-4240-B3EB-2D2E8653D4C5}"/>
+		<Property Name="LastOnLevel" Class="sys://Schema/System/Boolean" Description="Ignore LightLevel setting and go to last light level" ID="{94213E53-5CA0-4DCE-99DA-ED8E4D6FC751}"/>
+		<SuperClass LinkObject="sys://Schema/upb/FadeRate" ID="{EF70B341-953E-4A4E-B592-667B96B8B00A}"/>
+	</Class>
+	<Class Name="TransmitCommands" Description="Transmit Commands" ID="{7D297631-107A-424A-A066-361E83F60256}">
+		<SuperClass LinkObject="sys://Schema/System/Container" ID="{815007C3-F1A6-4151-8AEE-40EC5CFCB5E5}"/>
+		<ChildClass LinkObject="sys://Schema/upb/TransmitCommand" ID="{40CBE2FC-F99B-4A7A-AAD3-F8D4229D1FDF}"/>
+	</Class>
+	<Class Name="TransmitCommand" Description="Transmit Command entry" ID="{2398FECB-2D6C-4298-A1E2-4BF699199C6A}">
+		<Property Name="CommandID" Class="sys://Schema/System/Number" ReadOnly="True" Description="Identifier used to reference this command" ID="{ED832E1B-393B-4D29-86C4-BD869EC4FDAB}"/>
+		<Property Name="Command" Class="sys://Schema/System/Text" DefaultValue="FFFFFF" Description="Command data" ID="{7FBE9567-A8EF-4757-B016-661FBAC177E0}"/>
+	</Class>
+	<Class Name="upbLedMode" Virtual="true" Description="Standard LED Modes" ID="{D51FA9AF-0CAB-4681-8CAF-905B81A49D75}">
+		<Property Name="LEDMode" Class="sys://Schema/System/MultiValue" Description="The mode in which the LED functions" ID="{ACA1A06D-32FB-4AF3-A413-DDC17E21693C}">
+			<Enum Name="Indicator" Value="0" ID="{06E0B328-5893-460C-A417-09BA0E6F15AB}"/>
+			<Enum Name="Diagnostic" Value="1" ID="{3011C26D-8A93-4AA5-9CF9-ED1B6FED1E96}"/>
+		</Property>
+	</Class>
+	<Class Name="upbLedColor" Virtual="true" Description="Standard LED Colors" ID="{C3C018C2-FA6E-4FDD-BAC4-149CB5F7BCD6}">
+		<Property Name="LEDOnColor" Class="sys://Schema/System/MultiValue" Description="The LED color to use for an on state" ID="{2F9776B0-ABCA-41E6-ABBB-A526CB2C2D12}">
+			<Enum Name="Black" Value="0" ID="{5587A61C-AA1E-4CF6-95A4-FC93FEF540DA}"/>
+			<Enum Name="Red" Value="1" ID="{6BDEAE7B-E54C-4C72-A00B-7F3DCFDD3DE3}"/>
+			<Enum Name="Green" Value="2" ID="{AD6EB6E0-763E-4949-8686-9277CC3F1224}"/>
+			<Enum Name="Orange" Value="3" ID="{DEB732CC-F35A-4632-9666-6D7CDA8A36F5}"/>
+		</Property>
+		<Property Name="LEDOffColor" Class="sys://Schema/System/MultiValue" Description="The LED color to use for an off state" ID="{793F3B05-93E6-4838-9DB7-DEC0EF3DC793}">
+			<Enum Name="Black" Value="0" ID="{FB8B8868-7050-4D2A-88E2-120644290C8E}"/>
+			<Enum Name="Red" Value="1" ID="{31A90206-1086-469C-8BFB-FDBB06B39913}"/>
+			<Enum Name="Green" Value="2" ID="{F7BADFBF-9466-46E7-A936-A6B248A7EA84}"/>
+			<Enum Name="Orange" Value="3" ID="{EE63C1D1-421B-42DA-853E-A99159D55523}"/>
+		</Property>
+	</Class>
+	<MergeEntry Name="Devices" InsertLocation="sys://Devices" ID="{503FB118-CC03-4110-B76F-FCEBCE9D8025}">
+		<Object Name="upb" Description="Univeral Power Bus" Class="sys://Schema/upb/upb" ID="{38FB9F21-215D-4C77-BDD5-75A9EA4ABFBF}"/>
+	</MergeEntry>
+</DriverLibrary>

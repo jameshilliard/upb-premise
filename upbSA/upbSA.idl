@@ -1,0 +1,38 @@
+// This file will be processed by the MIDL tool to
+// produce the type library and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+
+[
+	object,
+	uuid(AF8067CF-EAF5-4C65-A0B2-EB2834CE6CFD),
+	dual,
+	helpstring("IupbSA Interface"),
+	pointer_default(unique)
+]
+interface IupbSA : IDispatch
+{
+};
+
+
+[
+	uuid(D135EDD4-1F4E-4E6D-A666-836A812194AD),
+	version(1.0),
+	helpstring("upbSA 1.0 Type Library")
+]
+library DriverLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(3FA8B46C-CAEC-454B-B84E-5B690ACE30CE),
+		helpstring("upbSA Class")
+	]
+	coclass upbSA
+	{
+		[default] interface IupbSA;
+	};
+};

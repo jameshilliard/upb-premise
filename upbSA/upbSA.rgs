@@ -1,0 +1,14 @@
+HKCR
+{
+	NoRemove CLSID
+	{
+		ForceRemove {3FA8B46C-CAEC-454B-B84E-5B690ACE30CE} = s 'upbSA Class'
+		{
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{D135EDD4-1F4E-4E6D-A666-836A812194AD}'
+		}
+	}
+}

@@ -1,0 +1,38 @@
+// This file will be processed by the MIDL tool to
+// produce the type library and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+
+[
+	object,
+	uuid(9304CA81-D456-4C12-AB93-BB817FD19169),
+	dual,
+	helpstring("IupbPCS Interface"),
+	pointer_default(unique)
+]
+interface IupbPCS : IDispatch
+{
+};
+
+
+[
+	uuid(438A2FF6-7132-442F-9100-CC3811691DDA),
+	version(1.0),
+	helpstring("upbPCS 1.0 Type Library")
+]
+library DriverLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(D40C5093-A19E-46D7-AC98-7128025B998C),
+		helpstring("upbPCS Class")
+	]
+	coclass upbPCS
+	{
+		[default] interface IupbPCS;
+	};
+};

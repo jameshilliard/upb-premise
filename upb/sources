@@ -1,0 +1,36 @@
+PRECOMPILED_CXX = 1 
+PRECOMPILED_INCLUDE = stdafx.h 
+PRECOMPILED_OBJ = stdafxp.obj 
+!include ..\premise.inc 
+#
+TARGETNAME=upb
+TARGETPATH=obj  
+TARGETTYPE=DYNLINK  
+DLLENTRY=_DllMainCRTStartup
+# 
+# The TARGETLIBS macro specifies additional libraries to link against your target  
+TARGETLIBS= \
+	$(SDK_LIB_PATH)\kernel32.lib \
+	$(SDK_LIB_PATH)\user32.lib \
+	$(SDK_LIB_PATH)\gdi32.lib \
+	$(SDK_LIB_PATH)\advapi32.lib \
+	$(SDK_LIB_PATH)\ole32.lib \
+	$(SDK_LIB_PATH)\oleaut32.lib \
+	$(SDK_LIB_PATH)\uuid.lib \
+    $(SDK_LIB_PATH)\Ws2_32.lib \
+	$(SYS_LIB_PATH)\sysuuid.lib \
+	$(SDK_LIB_PATH)\shlwapi.lib \
+    $(SDK_LIB_PATH)\Iphlpapi.lib \
+	$(SDK_LIB_PATH)\strsafe.lib
+
+INCLUDES=$(SDK_INC_PATH);$(INCLUDES)  
+
+SOURCES= \
+	$(TARGETNAME).idl \
+	$(TARGETNAME).rc \
+	$(TARGETNAME)Controller.cpp \
+	$(TARGETNAME)Driver.cpp \
+	$(TARGETNAME).cpp \
+	StdAfx.cpp
+
+C_DEFINES = $(C_DEFINES) -D_USRDLL

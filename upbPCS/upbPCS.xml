@@ -1,0 +1,134 @@
+<DriverLibrary Name="upbPCS" Description="Powerline Control Systems" Version="0.06" ID="{020120AA-7162-42ED-B93C-A6A10CD488B0}">
+	<Class Name="upbPCS" Description="Powerline Control Systems" ID="{D40C5093-A19E-46D7-AC98-7128025B998C}">
+		<SuperClass LinkObject="sys://Schema/System/Subsystem" ID="{EC554E87-A7C1-4BC6-8931-E60A875D8978}"/>
+		<Property Name="upbManufacturerID" DisplayName="Manufacturer ID" Class="sys://Schema/System/Number" DefaultValue="1" Description="Unique identifier of the device manufacturer this driver supports" ReadOnly="True" ID="{79CE833B-EC94-46F0-8F51-DBC04EE3BC20}"/>
+		<Property Name="upbProductIDs" DisplayName="Product ID List" Class="sys://Schema/System/Text" DefaultValue="1 WS1D6 3 WMC6 4 DTC6 13 WMC8 14 DTC8 48 SerialPIM" Description="The list of product ID's this driver supports" ReadOnly="True" ID="{F5EEFB5A-D972-46D3-8683-E26C2535D90B}"/>
+	</Class>
+	<Class Name="WS1D6" Description="Wall Switch 1 Dimmer 600W (WS1D6)" ID="{26C4B7E0-FED4-4EC4-952B-9A4978E2360F}">
+		<SuperClass LinkObject="sys://Schema/upbPCS/upbPCSBase" ID="{AD921FAC-B9F3-4D73-8FB8-1F666CFA0239}"/>
+		<SuperClass LinkObject="sys://Schema/upbPCS/Switch" ID="{90BD7ECB-E588-4FD2-A8F4-9FD0B5F7C3D2}"/>
+		<SuperClass LinkObject="sys://Schema/System/BindingTarget" ID="{A4EFCD36-BC37-4404-9592-4E36CCFA4389}"/>
+		<SuperClass LinkObject="sys://Schema/Device/Dimmer" ID="{173339B9-6562-414F-8EE4-E0D2CF502CA5}"/>
+		<SuperClass LinkObject="sys://Schema/Device/Power" ID="{4016ACD0-9404-4A5D-BE83-1D84A1F75CAD}"/>
+	</Class>
+	<Class Name="WMC6" Description="Wall Mount Controller 6-Button (WMC6)" ID="{A59C0C13-5A0B-4031-A50C-63BF988AD55C}">
+		<SuperClass LinkObject="sys://Schema/upbPCS/upbPCSBase" ID="{8AD8F3EA-2B2A-462B-B0C9-6CA2602D3D71}"/>
+		<SuperClass LinkObject="sys://Schema/upbPCS/Keypad" ID="{C13E9130-6E1C-474F-BD6A-D3258E558109}"/>
+		<Property Name="IREnabled" DisplayName="I/R Enabled" Class="sys://Schema/System/Boolean" Description="Enable I/R input" DefaultValue="True" ID="{9832030A-5550-4850-A0ED-3A57C4A96771}"/>
+		<Property Name="IRRoom" DisplayName="I/R Room" Class="sys://Schema/System/MultiValue" Description="Which room frequency the I/R receiver is set for" DefaultValue="0" ID="{3B6642CE-2AC5-4B47-B2F0-9A47F4884B37}">
+			<Enum Name="Room1" DisplayName="Room 1" Value="0" ID="{E3A66F92-A1A6-4EB1-9082-0D1018B99D7B}"/>
+			<Enum Name="Room2" DisplayName="Room 2" Value="1" ID="{AEB20BD8-DF06-45BC-8A6C-99E6645F0342}"/>
+			<Enum Name="Room3" DisplayName="Room 3" Value="2" ID="{6CCB35FC-465E-45AB-AB46-F2A75FBA6D78}"/>
+			<Enum Name="Room4" DisplayName="Room 4" Value="3" ID="{995FD4FC-1FB1-4BAC-AF30-B1F90C508C93}"/>
+		</Property>
+	</Class>
+	<Class Name="DTC6" Description="Desktop Controller 6-Button (DTC6)" ID="{FFA42C41-E70C-4831-94FE-FCC96A098D01}">
+		<SuperClass LinkObject="sys://Schema/upbPCS/upbPCSBase" ID="{1C2EC44A-33BD-4BDC-B0BC-0B8428C57CC3}"/>
+		<SuperClass LinkObject="sys://Schema/upbPCS/Keypad" ID="{516EFC4B-1D3F-400F-9266-DFB49A289B13}"/>
+	</Class>
+	<Class Name="WMC8" Description="Wall Mount Controller 8-Button (WMC8)" ID="{FBCC1842-8423-422C-91E6-496B3D465BC4}">
+		<SuperClass LinkObject="sys://Schema/upbPCS/upbPCSBase" ID="{E4F1D50F-AC62-4194-8C2B-19FDAA08BCFD}"/>
+		<SuperClass LinkObject="sys://Schema/upbPCS/Keypad" ID="{AC65CC2B-674F-43F9-A0B3-113D6C180AFF}"/>
+	</Class>
+	<Class Name="DTC8" Description="Desktop Controller 8-Button (DTC8)" ID="{E1B385A0-6714-446E-BD05-A46C8BA692E0}">
+		<SuperClass LinkObject="sys://Schema/upbPCS/upbPCSBase" ID="{03D261FB-9786-447D-85FE-A0E6CCAB3EBA}"/>
+		<SuperClass LinkObject="sys://Schema/upbPCS/Keypad" ID="{F9AC244D-E97F-4758-95D0-3B7B9A6EF892}"/>
+	</Class>
+	<Class Name="SerialPIM" Description="Powerline Interface Module (PIM)" ID="{D80501BE-9934-465C-BDAF-4A0417A5DA40}">
+		<SuperClass LinkObject="sys://Schema/upbPCS/upbPCSBase" ID="{85CD3D3C-92E7-40ED-B362-C3B006C32F93}"/>
+		<SuperClass LinkObject="sys://Schema/upb/upbPIM" ID="{C8ADC009-A85F-4156-9AE5-C6BF0E059B96}"/>
+		<SuperClass LinkObject="sys://Schema/System/BindingTarget" ID="{C0CB241E-1032-4AE2-8501-6356520C24F2}"/>
+	</Class>
+	<Class Name="upbPCSBase" Virtual="true" Description="Distinguishing class for all PCS devices in this library" ID="{6C0A4647-76C7-45C4-9B29-2C43350225C1}">
+	</Class>
+	<Class Name="LEDOnAction" Description="Represents the actions to take on other LED's when this button's LED is turned on" ID="{210286AE-24EB-4AAC-BE04-F519B33DE139}">
+		<Property Name="LEDAction" DisplayName="LED Action" Class="sys://Schema/System/MultiValue" Description="Action to take on the LEDActionGroup when this button's LED is turned on" DefaultValue="2" ID="{8FC9DA78-46F5-45E5-A373-4B54D756C7C9}">
+			<Enum Name="DoNothing" DisplayName="Do nothing" Value="0" ID="{C92FA9CE-3ABE-4DA2-A914-950FC498B8F3}"/>
+			<Enum Name="TurnOff" DisplayName="Turn off" Value="2" ID="{F8B6D539-0EA0-4B94-9E5B-78CF03C96A3B}"/>
+			<Enum Name="TurnOn" DisplayName="Turn on" Value="3" ID="{C25F83C2-8588-416A-A9E8-70B11AFCA464}"/>
+		</Property>
+		<Property Name="LEDActionGroup" DisplayName="LED Action Group" Class="sys://Schema/System/MultiValue" Description="The LED group to which the LEDAction applies" ID="{5CBC37F9-BD8B-4030-8368-4D2BC2DAED5B}">
+			<Enum Name="Group1" DisplayName="Group 1" Value="0" ID="{CFB13F95-0539-4C1D-923F-E3E896F7E61A}"/>
+			<Enum Name="Group2" DisplayName="Group 2" Value="1" ID="{0BF6EC82-E8E5-41A9-A8AF-1F8C910DAAEF}"/>
+			<Enum Name="Group3" DisplayName="Group 3" Value="2" ID="{B9778E76-9F09-452C-8923-CA6A18257780}"/>
+			<Enum Name="Group4" DisplayName="Group 4" Value="3" ID="{71FD372E-1A46-4B30-AEAC-38640CBAFA83}"/>
+		</Property>
+		<Property Name="LEDGroupMask" DisplayName="LED Group Mask" Class="sys://Schema/System/Number" DefaultValue="1" Description="The mask of which LEDAction groups this button belongs to" ID="{5D708FD9-C0F3-4186-BDE8-9BCAB1B68F5B}"/>
+	</Class>
+	<Class Name="KeypadButton" Description="Represents the button state for a single keypad button" ID="{05698C0F-FADB-4FBC-8431-F39B5D876D03}">
+		<SuperClass LinkObject="sys://Schema/System/BindingTarget" ID="{E1399845-590C-4317-B7EB-684ABDAEB232}"/>
+		<SuperClass LinkObject="sys://Schema/Device/Button" ID="{3B391366-0AA1-4147-86B9-BB5C2783E69D}"/>
+		<Property Name="ButtonID" Class="sys://Schema/System/Number" DefaultValue="0" ReadOnly="True" Description="The identifier for this button" ID="{936BB979-AF4D-4CB1-B87E-41D9C799B7C9}"/>
+		<ChildClass LinkObject="sys://Schema/upbPCS/TransmitComponent" ID="{D30D1C58-61E1-4BC6-BBB1-84EEF02479B5}"/>
+		<ChildClass LinkObject="sys://Schema/upb/ReceiveComponent" ID="{F9A63B59-9AEF-4CD8-9BFD-7706B493C7B1}"/>
+		<ChildClass LinkObject="sys://Schema/upbPCS/LEDOnAction" ID="{C4E45C73-DE74-4C7B-B0AC-4704AE3A1294}"/>
+	</Class>
+	<Class Name="SwitchButton" Description="Represents the button state for a single switch button" ID="{27F4097D-421C-4857-8D09-D78D857D8F63}">
+		<SuperClass LinkObject="sys://Schema/System/BindingTarget" ID="{F3D4B0D6-525E-43D0-A9D4-703469FC567F}"/>
+		<SuperClass LinkObject="sys://Schema/Device/Button" ID="{46AFA14C-C52C-455F-9E30-8E410A4A2FB3}"/>
+		<Property Name="ButtonID" Class="sys://Schema/System/Number" DefaultValue="0" ReadOnly="True" Description="The identifier for this button" ID="{431D6562-8484-436C-87AC-DDDCA91578DE}"/>
+		<ChildClass LinkObject="sys://Schema/upbPCS/TransmitComponent" ID="{D8E2D698-4C76-4CAE-982E-C33985C0DF27}"/>
+		<ChildClass LinkObject="sys://Schema/upbPCS/RockerAction" ID="{656C4B90-1FB2-4EF0-84AF-F1BAEA856458}"/>
+	</Class>
+	<Class Name="RockerAction" Description="Rocker Switch Action" ID="{84CB44E0-5C60-4111-8E75-C3D4903408A5}">
+		<Property Name="ButtonState" Class="sys://Schema/System/MultiValue" ReadOnly="True" Description="The button state this rocker action is used for" ID="{6A03D073-396D-4F5C-95B2-7BDDB34F8C8A}">
+			<Enum Name="Press" Value="1" ID="{D8F1F080-B384-47C2-9B7D-BA9DB63C9298}"/>
+			<Enum Name="DoubleTap" Value="3" ID="{E0EC2BA8-7250-4BED-8BA6-7E2E7D138BA0}"/>
+		</Property>
+		<Property Name="LightLevel" Class="sys://Schema/System/Percent" Description="Light level for this rocker action" ID="{4EDA4D08-823C-4CFA-BAF7-5F7ABFCBD546}"/>
+		<Property Name="LastOnLevel" Class="sys://Schema/System/Boolean" Description="Ignore LightLevel setting and go to last light level" ID="{06C56CFB-5845-4701-8ABC-81170BFC9450}"/>
+		<SuperClass LinkObject="sys://Schema/upb/FadeRate" Description="Fade rate for this rocker action" ID="{B8582CD4-C5AD-4E43-B4B1-BF4334B6F900}"/>
+	</Class>
+	<Class Name="Switch" Virtual="true" Description="PCS Switch class" ID="{3FA81D13-55EE-46E2-8246-D8CAD250EBCC}">
+		<SuperClass LinkObject="sys://Schema/Device/Keypads/KeypadDevice" ID="{9B0A71B1-1320-4ED5-9148-646F20562186}"/>
+		<SuperClass LinkObject="sys://Schema/upb/upbModule" ID="{DD6479D8-2DA0-4FC2-9DDF-ECE9F6F0CAD1}"/>
+		<SuperClass LinkObject="sys://Schema/System/Container" ID="{919A60AD-A2FC-4816-957F-B68AFE837989}"/>
+		<SuperClass LinkObject="sys://Schema/upb/TransmissionControl" ID="{106C69CE-27C1-4030-B3D5-385D86813942}"/>
+		<Property Name="LoadType" Class="sys://Schema/System/MultiValue" Description="Type of load the switch drives" DefaultValue="1" ID="{B38A822F-6F41-41E3-83C9-BFA3CFBBD351}">
+			<Enum Name="Switch" Value="0" ID="{F250B08B-143B-4650-8068-B722FA35D980}"/>
+			<Enum Name="Dimmer" Value="1" ID="{C47103F1-D190-46E1-9A31-860FA737C655}"/>
+		</Property>
+		<Property Name="ReportState" Class="sys://Schema/System/Boolean" Description="Transmit a State Report on rocker switch events" ID="{3DFE0C34-D3EC-4CA3-BC20-97B3FF3CED5D}"/>
+		<SuperClass LinkObject="sys://Schema/upb/DefaultFadeRate" Description="Default Fade Rate used by the switch when programmed as a dimmer" ID="{0472178A-F3B4-459E-B4FD-2F4EE06AF6C9}"/>
+		<SuperClass LinkObject="sys://Schema/upb/upbLedMode" ID="{33C3B3D1-6F49-48FB-9808-251674DD669F}"/>
+		<SuperClass LinkObject="sys://Schema/upb/upbLedColor" ID="{EC0C5665-D9E3-43EF-A402-50E8DC9E8B84}"/>
+		<ChildClass LinkObject="sys://Schema/upbPCS/SwitchButton" ID="{A2474F24-821E-40A3-B647-EA1D9AFD41FB}"/>
+		<ChildClass LinkObject="sys://Schema/upb/SwitchReceiveComponents" ID="{BB14193D-0C44-44E0-8509-4CE47AC1516D}"/>
+		<ChildClass LinkObject="sys://Schema/upb/TransmitCommands" ID="{4018E144-757E-41FF-A7BF-5BA13775B8B5}"/>
+	</Class>
+	<Class Name="Keypad" Virtual="true" Description="PCS Keypad class" ID="{483E7D22-D6E5-4809-BE10-3E157B099ACE}">
+		<SuperClass LinkObject="sys://Schema/Device/Keypads/KeypadDevice" ID="{EB043430-720F-46C4-9E64-ABB62B8C033C}"/>
+		<SuperClass LinkObject="sys://Schema/upb/upbModule" ID="{656728C8-F7C0-470B-BDC1-C9EC51CFA814}"/>
+		<SuperClass LinkObject="sys://Schema/System/Container" ID="{9FFA1F31-F075-4DCA-931E-28BB634B9EA8}"/>
+		<SuperClass LinkObject="sys://Schema/upb/TransmissionControl" ID="{AAC6802A-382B-4986-B276-EED491F116B8}"/>
+		<Property Name="LEDBacklighting" Class="sys://Schema/System/Boolean" Description="Enable LED backlighting" DefaultValue="True" ID="{32630C52-0EA0-499A-A148-0EF7B54ED477}"/>
+		<Property Name="LEDTracking" Class="sys://Schema/System/Boolean" Description="Enable LED tracking" DefaultValue="True" ID="{AD799491-86DF-4A20-B445-D68E11F8636D}"/>
+		<Property Name="LEDOutput" Class="sys://Schema/System/Boolean" Description="Enable LED output" DefaultValue="True" ID="{3FE2DC3C-32B4-4065-8150-73305FC1B148}"/>
+		<Property Name="LEDBrightness" Class="sys://Schema/System/MultiValue" Description="Brightness of the button LEDs" DefaultValue="2" ID="{3DE8F539-A02A-4C8E-BCBF-471D937FAC35}">
+			<Enum Name="Faint" Value="0" ID="{A6EDF5A3-9F3A-4A0D-8A6A-0105801A6E19}"/>
+			<Enum Name="Low" Value="1" ID="{3177F53E-2793-47F0-A52D-49EA50A97A6F}"/>
+			<Enum Name="Medium" Value="2" ID="{8FF77B16-C707-40A5-8778-EFA5A5824C1D}"/>
+			<Enum Name="High" Value="3" ID="{93E5FBF2-7506-423A-9A6F-0BBEDDDA61EC}"/>
+		</Property>
+		<ChildClass LinkObject="sys://Schema/upbPCS/KeypadButton" ID="{EC70E85F-281C-4A6E-BC0A-1FE77DE690CF}"/>
+		<ChildClass LinkObject="sys://Schema/upb/TransmitCommands" ID="{C0977697-6CA0-4FEF-8D9C-BCF1866D6EE6}"/>
+	</Class>
+	<Class Name="CommandID" Description="Reference to a pair of TransmitCommand entries" ID="{01F7F3CA-2FF7-4FFD-879E-253A4EFD3F83}">
+		<Property Name="ButtonState" Class="sys://Schema/System/MultiValue" ReadOnly="True" Description="The button state this command is used for" ID="{DDCF7B07-A29F-47AF-99ED-A901CC80E0A2}">
+			<Enum Name="Release" Value="0" ID="{CE4FB4EC-255B-46F1-9275-1553A1EC4B8C}"/>
+			<Enum Name="Press" Value="1" ID="{7A055D23-0264-40F5-B7E2-9BC9B04AD52C}"/>
+			<Enum Name="Hold" Value="2" ID="{C5514368-23F3-4F5E-8F83-5A8289930116}"/>
+			<Enum Name="DoubleTap" Value="3" ID="{9FD8AF1A-4DE1-4548-8D86-03C09FF8FC62}"/>
+		</Property>
+		<Property Name="OnToggle" Class="sys://Schema/System/Number" DefaultValue="15" Description="TransmitCommand to use when LED is currently off, or 15 for none" ID="{29540AB8-D6DC-42FD-A890-E071CD2D526C}"/>
+		<Property Name="OffToggle" Class="sys://Schema/System/Number" DefaultValue="15" Description="TransmitCommand to use when LED is currently on, or 15 for none" ID="{6118BE42-FDA0-49CE-BF9D-A8E6A8E44B8B}"/>
+	</Class>
+	<Class Name="TransmitComponent" Description="Transmit Component with Link ID to send, 0 for last Link ID received, or 255 to disable" ID="{3C59B013-48F6-4227-8466-AF55FD37C93D}">
+		<SuperClass LinkObject="sys://Schema/System/Container" ID="{F40ED1C6-D0AC-412D-8A17-585762ED6A26}"/>
+		<SuperClass LinkObject="sys://Schema/upb/TransmitComponent" ID="{8BA73963-4E17-4A6E-82A8-E1E4DB92B51B}"/>
+		<ChildClass LinkObject="sys://Schema/upbPCS/CommandID" ID="{6A13A64B-B107-40AF-8877-0D0E8261DF54}"/>
+	</Class>
+	<MergeEntry Name="Devices" InsertLocation="sys://Devices" ID="{1A6D99ED-D862-435D-8F88-33BD73A81FA4}">
+		<Object Name="upbPCS" Description="upbPCS Driver Library" Class="sys://Schema/upbPCS/upbPCS" ID="{67C1B509-FFCD-4CB9-80E3-A085E2561514}"/>
+	</MergeEntry>
+</DriverLibrary>
